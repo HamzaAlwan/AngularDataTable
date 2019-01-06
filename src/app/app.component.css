@@ -1,0 +1,7 @@
+div.container {
+  margin: 0 40px;
+}
+
+.center {
+  flex: 1 1 auto;
+}

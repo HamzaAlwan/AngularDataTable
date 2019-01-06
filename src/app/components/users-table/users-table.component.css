@@ -1,0 +1,23 @@
+.hide {
+  display: none;
+}
+
+mat-footer-row mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}
+
+img {
+  width: 100px;
+  height: 70px;
+  padding: 3px;
+}
+
+mat-header-row mat-header-cell {
+  text-align: center !important;
+}
+
+.data-table {
+  width: 100%;
+  margin: 10px auto;
+}

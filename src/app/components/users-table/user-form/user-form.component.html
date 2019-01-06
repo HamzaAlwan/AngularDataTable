@@ -1,0 +1,63 @@
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value ? "Modefy User": "New User"}}</span>
+  <span class="center"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="Close()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key" />
+        <mat-form-field>
+          <input formControlName="scientificName" matInput placeholder="Scientific Name*" />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="Name*" />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-error>This field is required</mat-error>
+          <mat-select formControlName="speciality" placeholder="Speciality*">
+            <mat-option>none</mat-option>
+            <ng-container *ngFor="let speciality of specialities">
+              <mat-option value="{{speciality.value}}">{{speciality.value}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="relatedTerms" matInput placeholder="Related Terms" />
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="broadTearms" matInput placeholder="Broad Tearms" />
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <mat-error>This field is required</mat-error>
+          <mat-select formControlName="medicalLine" placeholder="Medical Line*">
+            <mat-option>none</mat-option>
+            <ng-container *ngFor="let medicalLine of medicalLines">
+              <mat-option value="{{medicalLine.value}}">{{medicalLine.value}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="rank" matInput placeholder="Rank" />
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="nonPreferdTerms" matInput placeholder="Non Preferd Terms" />
+        </mat-form-field>
+        <input class="upload" (change)="getImage($event)" id="image" multiple type="file" />
+        <div class='button-row'>
+          <button mat-raised-button color="primary" [disabled]="service.form.invalid" type="submit">Submit</button>
+          <button mat-raised-button color="warn" class="clear" (click)="Clear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

@@ -1,0 +1,28 @@
+form.normal-form {
+  margin: 10px;
+}
+
+.controles-container {
+  width: 100%;
+  padding: 5%;
+}
+
+.controles-container>* {
+  width: 100%;
+}
+
+.upload {
+  margin: 21px 0;
+}
+
+.button-row {
+  margin: 21px auto;
+}
+
+.clear {
+  margin-left: 20px;
+}
+
+.center {
+  flex: 1 1 auto;
+}
