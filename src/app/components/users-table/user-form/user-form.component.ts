@@ -28,13 +28,13 @@ export class UserFormComponent implements OnInit {
     { value: 'Medical Line 3' }
   ];
 
-  items;
-
+  // Save image file, type and name;
   image;
   imageName;
   imageBinary;
   imageType;
 
+  // Upload the image and convert it to binary
   getImage(event) {
     this.imageType = event.target.files[0].type;
     this.imageName = event.target.files[0].name;

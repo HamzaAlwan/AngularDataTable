@@ -27,6 +27,7 @@ export class UsersTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   usersList: MatTableDataSource<any>;
   displayedColumns: string[] = [
+    'id',
     'scientificName',
     'name',
     'speciality',

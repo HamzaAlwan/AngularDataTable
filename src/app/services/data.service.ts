@@ -15,11 +15,29 @@ export class DataService {
     scientificName: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     speciality: new FormControl('', Validators.required),
-    relatedTerms: new FormControl(''),
-    broadTearms: new FormControl(''),
+    relatedTerms: new FormControl([
+      {
+        display: 'display',
+        value: 'Add tag +',
+        readonly: true
+      }
+    ]),
+    broadTearms: new FormControl([
+      {
+        display: 'display',
+        relatedTerms: 'Add tag +',
+        readonly: true
+      }
+    ]),
     medicalLine: new FormControl('', Validators.required),
     rank: new FormControl(0),
-    nonPreferdTerms: new FormControl(''),
+    nonPreferdTerms: new FormControl([
+      {
+        display: 'display',
+        value: 'Add tag +',
+        readonly: true
+      }
+    ]),
     image: new FormControl({})
   });
 
@@ -29,11 +47,29 @@ export class DataService {
       scientificName: '',
       name: '',
       speciality: '',
-      relatedTerms: '',
-      broadTearms: '',
+      relatedTerms: [
+        {
+          display: 'display',
+          value: 'Add tag +',
+          readonly: true
+        }
+      ],
+      broadTearms: [
+        {
+          display: 'display',
+          value: 'Add tag +',
+          readonly: true
+        }
+      ],
       medicalLine: '',
       rank: 0,
-      nonPreferdTerms: '',
+      nonPreferdTerms: [
+        {
+          display: 'display',
+          value: 'Add tag +',
+          readonly: true
+        }
+      ],
       image: {}
     });
   }
@@ -44,6 +80,9 @@ export class DataService {
   }
 
   insertUser(user) {
+    user.relatedTerms.shift();
+    user.broadTearms.shift();
+    user.nonPreferdTerms.shift();
     this.usersList.push({
       scientificName: user.scientificName,
       name: user.name,

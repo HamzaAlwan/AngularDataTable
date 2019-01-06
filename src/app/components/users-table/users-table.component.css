@@ -16,8 +16,3 @@ img {
 mat-header-row mat-header-cell {
   text-align: center !important;
 }
-
-.data-table {
-  width: 100%;
-  margin: 10px auto;
-}

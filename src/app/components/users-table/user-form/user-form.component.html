@@ -27,12 +27,8 @@
             </ng-container>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
-          <input formControlName="relatedTerms" matInput placeholder="Related Terms" />
-        </mat-form-field>
-        <mat-form-field>
-          <input formControlName="broadTearms" matInput placeholder="Broad Tearms" />
-        </mat-form-field>
+        <tag-input formControlName="relatedTerms" placeholder="Related Terms" [identifyBy]="'value'" [displayBy]="'value'"></tag-input>
+        <tag-input formControlName="broadTearms" placeholder="Broad Tearms" [identifyBy]="'value'" [displayBy]="'value'"></tag-input>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -49,9 +45,7 @@
         <mat-form-field>
           <input formControlName="rank" matInput placeholder="Rank" />
         </mat-form-field>
-        <mat-form-field>
-          <input formControlName="nonPreferdTerms" matInput placeholder="Non Preferd Terms" />
-        </mat-form-field>
+        <tag-input formControlName="nonPreferdTerms" placeholder="Non Preferd Terms" [identifyBy]="'value'" [displayBy]="'value'"></tag-input>
         <input class="upload" (change)="getImage($event)" id="image" multiple type="file" />
         <div class='button-row'>
           <button mat-raised-button color="primary" [disabled]="service.form.invalid" type="submit">Submit</button>

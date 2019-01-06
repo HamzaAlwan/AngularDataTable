@@ -11,7 +11,7 @@ snack-bar-container.success {
 }
 
 snack-bar-container.warn {
-  background-color: #f99157;
+  background-color: #e24f0a;
   color: #fff;
 }
 
@@ -49,5 +49,55 @@ snack-bar-container.warn {
   min-width: 0px !important;
   height: 40px;
   padding: 0px !important;
-  border: none !important
+  border: none !important;
+}
+
+tag-input {
+  padding-bottom: 10px !important;
+}
+
+mat-cell {
+  display: initial !important;
+}
+
+mat-cell:not(:first-child):not(:last-child) {
+  padding: 20px 10px;
+}
+
+mat-cell:last-child {
+  padding-left: 20px;
+}
+
+mat-header-cell:first-child {
+  flex: 0.9;
+}
+
+mat-cell,
+mat-table,
+mat-header-cell {
+  min-height: initial !important;
+}
+
+mat-header-cell:nth-child(2),
+mat-header-cell:nth-child(10),
+mat-header-cell:nth-child(11) {
+  display: initial !important;
+}
+
+mat-header-cell:nth-child(2) {
+  margin-right: 25px !important;
+}
+
+.tag a {
+  display: inline-block;
+  text-decoration: none;
+  margin: 3px 4px;
+  color: white;
+}
+
+.tag {
+  background: #929292;
+  padding: 2px 0;
+  margin: 3px 4px;
+  border-radius: 10px;
 }

@@ -3,78 +3,66 @@
     <mat-icon>add</mat-icon>Create
   </button>
   <mat-form-field class="search-form-field" floatLabel="never">
-    <input
-      matInput
-      [(ngModel)]="searchKey"
-      placeholder="Search"
-      autocomplete="off"
-      (keyup)="applyFilter()"
-    />
-    <button
-      mat-button
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      *ngIf="searchKey"
-      (click)="searchClear()"
-    >
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()" />
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="searchClear()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 </div>
 <div class="mat-elevation-z8 data-table">
   <mat-table [dataSource]="usersList" matSort>
-    <ng-container matColumnDef="scientificName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Scientific Name
+    <ng-container #id matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id
+      </mat-header-cell>
+      <mat-cell *matCellDef="let elem">{{ elem.$key.slice(-4) }}</mat-cell>
+    </ng-container>
+    <ng-container #scientificName matColumnDef="scientificName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Scientific Name
       </mat-header-cell>
       <mat-cell *matCellDef="let elem">{{ elem.scientificName }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="name">
+    <ng-container #name matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
       <mat-cell *matCellDef="let elem">{{ elem.name }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="speciality">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Speciality</mat-header-cell
-      >
+    <ng-container #speciality matColumnDef="speciality">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Speciality</mat-header-cell>
       <mat-cell *matCellDef="let elem">{{ elem.speciality }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="relatedTerms">
-      <mat-header-cell *matHeaderCellDef>Related Terms</mat-header-cell>
-      <mat-cell *matCellDef="let elem">{{ elem.relatedTerms }}</mat-cell>
+    <ng-container #relatedTerms matColumnDef="relatedTerms">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Related Terms</mat-header-cell>
+      <mat-cell *matCellDef="let elem"><span class="tag" *ngFor="let term of elem.relatedTerms">
+          <a href="#">{{term.value}}&nbsp;</a>
+        </span></mat-cell>
     </ng-container>
-    <ng-container matColumnDef="broadTearms">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Broad Tearms</mat-header-cell
-      >
-      <mat-cell *matCellDef="let elem">{{ elem.broadTearms }}</mat-cell>
+    <ng-container #broadTearms matColumnDef="broadTearms">
+      <mat-header-cell *matHeaderCellDef>Broad Tearms</mat-header-cell>
+      <mat-cell *matCellDef="let elem"> <span class="tag" *ngFor="let term of elem.broadTearms">
+          <a href="#">{{term.value}}&nbsp;</a>
+        </span></mat-cell>
     </ng-container>
-    <ng-container matColumnDef="medicalLine">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Medical Line</mat-header-cell
-      >
+    <ng-container #medicalLine matColumnDef="medicalLine">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Medical Line</mat-header-cell>
       <mat-cell *matCellDef="let elem">{{ elem.medicalLine }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="rank">
+    <ng-container #rank matColumnDef="rank">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Rank</mat-header-cell>
       <mat-cell *matCellDef="let elem">{{ elem.rank }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="nonPreferdTerms">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Non Preferd Terms</mat-header-cell
-      >
-      <mat-cell *matCellDef="let elem">{{ elem.nonPreferdTerms }}</mat-cell>
+    <ng-container #nonPreferdTerms matColumnDef="nonPreferdTerms">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>NonPreferd</mat-header-cell>
+      <mat-cell *matCellDef="let elem">
+        <span class="tag" *ngFor="let term of elem.nonPreferdTerms">
+          <a href="#">{{term.value}}&nbsp;</a>
+        </span>
+      </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="image">
+    <ng-container #image matColumnDef="image">
       <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
-      <mat-cell *matCellDef="let elem"
-        ><img
-          id="{{ elem.image.name }}"
-          src="data:{{ elem.image.type }};base64,{{ elem.image.data }}"
-      /></mat-cell>
+      <mat-cell *matCellDef="let elem"><img id="{{ elem.image.name }}" src="data:{{ elem.image.type }};base64,{{ elem.image.data }}" />
+      </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="actions">
+    <ng-container #actions matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let row">
         <button mat-icon-button (click)="onEdit(row)">
@@ -95,14 +83,8 @@
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    <mat-footer-row
-      *matFooterRowDef="['loading']"
-      [ngClass]="{ hide: usersList != null }"
-    ></mat-footer-row>
-    <mat-footer-row
-      *matFooterRowDef="['noData']"
-      [ngClass]="{ hide: !(usersList != null && usersList.data.length === 0) }"
-    ></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{ hide: usersList != null }"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{ hide: !(usersList != null && usersList.data.length === 0) }"></mat-footer-row>
   </mat-table>
   <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
 </div>
